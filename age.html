@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css.css">
+  <script src="https://kit.fontawesome.com/96631ead49.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <ul class="first">
+    <li><a href="#none" style="background-color: #4CAF50;">Home</a></li>
+    <li><a href="#none">News</a></li>
+    <li><a href="#none">Contact</a< /li>
+    <li><a href="#none">About</a></li>
+  </ul>
+  <h1>age calculator <i class="fa fa-calculator" aria-hidden="true"></i></h1>
+  <div class="out">
+    <p>input your birthday <i class="fa fa-birthday-cake" aria-hidden="true"></i></p>
+    <div class="grid">
+      <div><label for="year">year :</label><br><input type="text" name="year" id="year" placeholder="YYYY"></div>
+      <div><label for="month" class="lab">month :</label><br><input type="text" name="month" id="month" placeholder="MM"></div>
+      <div><label for="day">day :</label><br><input type="text" name="day" id="day" placeholder="DD"></div>
+    </div>
+    <button type="submit" onclick="age()">send</button>
+    <p id="demo"></p>
+  </div>
+  <script>
+let currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth()+1;
+let currentDay = new Date().getDate();
+var years,months,days;
+function age() {
+  const year = document.querySelectorAll("input")[0].value;
+ const month = document.querySelectorAll("input")[1].value;
+ const day = document.querySelectorAll("input")[2].value;
+ years = currentYear - year;
+ if (currentMonth >= month) {
+    months = currentMonth - month;
+ } else {
+    months = (currentMonth+12) - month;
+    years--;
+ } 
+ if (currentDay >= day) {
+    days = currentDay - day;
+ } else {
+    days = (currentDay+30) - day;
+    if(months === 0){
+        years--;
+        months = 11;
+    }
+    else 
+    months--;
+ }
+ document.getElementById("demo").innerHTML=  `your age is ${years} year and ${months} months and ${days} days`;
+}
+  </script>
+</body>
+
+</html>
