@@ -21,42 +21,55 @@
   <div class="out">
     <p>input your birthday <i class="fa fa-birthday-cake" aria-hidden="true"></i></p>
     <div class="grid">
-      <div><label for="year">year :</label><br><input type="text" name="year" id="year" placeholder="YYYY"></div>
-      <div><label for="month" class="lab">month :</label><br><input type="text" name="month" id="month" placeholder="MM"></div>
-      <div><label for="day">day :</label><br><input type="text" name="day" id="day" placeholder="DD"></div>
+      <div>
+        <label for="year">year :</label>
+        <br><input type="text" name="year" id="year" placeholder="YYYY" maxlength="4" minlength="4" pattern="[0-9]{4}" required>
+      </div>
+      <div><label for="month" class="lab">month :</label><br><input type="text" name="month" id="month" placeholder="MM"
+          maxlength="2"></div>
+      <div><label for="day">day :</label><br><input type="text" name="day" id="day" placeholder="DD" maxlength="2"></div>
     </div>
     <button type="submit" onclick="age()">send</button>
     <p id="demo"></p>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
   </div>
   <script>
-let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth()+1;
-let currentDay = new Date().getDate();
-var years,months,days;
-function age() {
-  const year = document.querySelectorAll("input")[0].value;
- const month = document.querySelectorAll("input")[1].value;
- const day = document.querySelectorAll("input")[2].value;
- years = currentYear - year;
- if (currentMonth >= month) {
-    months = currentMonth - month;
- } else {
-    months = (currentMonth+12) - month;
-    years--;
- } 
- if (currentDay >= day) {
-    days = currentDay - day;
- } else {
-    days = (currentDay+30) - day;
-    if(months === 0){
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth() + 1;
+    let currentDay = new Date().getDate();
+    var years, months, days;
+    const d = [31,28,31,30,31,30,31,31,30,31,30,31];
+    function age() {
+      const year = document.querySelectorAll("input")[0].value;
+      const month = document.querySelectorAll("input")[1].value;
+      const day = document.querySelectorAll("input")[2].value;
+      years = currentYear - year;
+      if (currentMonth >= month) {
+        months = currentMonth - month;
+      } else {
+        months = (currentMonth + 12) - month;
         years--;
-        months = 11;
+      }
+      if (currentDay >= day) {
+        days = currentDay - day;
+      } else {
+        days = currentDay + 30 - day;
+        if (months === 0) {
+          years--;
+          months = 11;
+        }
+        else
+          months--;
+      }
+      document.getElementById("demo").innerHTML = `your age is ${years} year and ${months} months and ${days} days`;
+      document.getElementById("demo1").innerHTML = `= ${(years*12+ months)} months and ${days} days`;
+      document.getElementById("demo2").innerHTML = `= ${Math.floor(years * 365.25 ) + (months * 30) + days} days`;
+      document.getElementById("demo3").innerHTML = `= ${Math.floor((years * 365.25 ) + (months * 30) + days) * 24}hours `;
+      document.getElementById("demo4").innerHTML = `= ${Math.floor(((years * 365.25 ) + (months * 30) + days) * 24) * 60} minutes`;
     }
-    else 
-    months--;
- }
- document.getElementById("demo").innerHTML=  `your age is ${years} year and ${months} months and ${days} days`;
-}
   </script>
 </body>
 
